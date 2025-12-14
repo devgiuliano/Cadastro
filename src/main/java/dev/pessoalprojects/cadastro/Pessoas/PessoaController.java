@@ -1,4 +1,4 @@
-package dev.pessoalprojects.cadastro;
+package dev.pessoalprojects.cadastro.Pessoas;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

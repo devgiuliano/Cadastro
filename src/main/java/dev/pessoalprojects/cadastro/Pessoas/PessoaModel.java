@@ -1,9 +1,9 @@
-package dev.pessoalprojects.cadastro;
+package dev.pessoalprojects.cadastro.Pessoas;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import dev.pessoalprojects.cadastro.Tarefas.TarefasModel;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "cadastro_de_pessoa")
@@ -15,6 +15,9 @@ public class PessoaModel {
     private String nome;
     private String email;
     private int idade;
+    @ManyToOne
+    @JoinColumn(name = "Missoes_id")
+    private TarefasModel tarefas;
 
     public PessoaModel() {
     }
