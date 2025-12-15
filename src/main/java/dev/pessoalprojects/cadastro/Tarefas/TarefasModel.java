@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name ="tb_cadastro_tarefas")
+@Table(name = "tb_cadastro_tarefas")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +21,6 @@ public class TarefasModel {
     private String nome;
     private String dificuldade;
     // Uma missão pode ter vários ninjas.
-    @OneToMany(mappedBy ="tarefas")
+    @OneToMany(mappedBy = "tarefas")
     private List<PessoaModel> pessoas;
 }
