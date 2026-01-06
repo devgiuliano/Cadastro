@@ -1,11 +1,17 @@
 package dev.pessoalprojects.cadastro.Pessoas;
-
-
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping
+@RequestMapping("pessoas")
 public class PessoaController {
+    private PessoaService pessoaService;
+
+    public PessoaController(PessoaService pessoaService) {
+        this.pessoaService = pessoaService;
+    }
+
     // Adicionar pessoa(CREATE)
     @PostMapping("/criar")
     public String criarPessoa() {
@@ -14,14 +20,14 @@ public class PessoaController {
 
     // Mostrar todas as pessoas(READ)
     @GetMapping("/listar")
-    public String mostrarTodasAsPessoas() {
-        return "Mostrar todas as pessoas";
+    public List<PessoaModel>listarPessoas() {
+        return pessoaService.listarPessoas();
     }
 
     // Mostrar pessoa por id(READ)
-    @GetMapping("/listarID")
-    public String mostrarPessoaPorId() {
-        return "Mostrar pessoas por id";
+    @GetMapping("/listar/{id}")
+    public PessoaModel listarPessoaPorId(@PathVariable Long id){
+        return pessoaService.listarPessoaPorId(id);
     }
 
     // Alterar dados da pessoa(UPDATE)
