@@ -242,6 +242,7 @@ Execute os testes com:
 ## 👤 Autor
 
 Projeto desenvolvido para fins de estudo e consolidação de conhecimentos em Spring Boot e desenvolvimento backend.
+-Giuliano M 
 
 ---
 
