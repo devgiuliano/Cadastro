@@ -25,7 +25,11 @@ public class PessoaModel {
 
     @Column(name = "Idade")
     private int idade;
-    //Um ninja para váris missões.
+
+    @Column(name = "Cidade")
+    private String cidade;
+
+    //Uma pessoa para váris tarefas.
     @ManyToOne
     @JoinColumn(name = "tarefas_id")//Foreing key
     private TarefasModel tarefas;
