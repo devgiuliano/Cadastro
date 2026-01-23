@@ -5,13 +5,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "tb_cadastro_de_pessoa")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@ToString(exclude = "tarefas")
 public class PessoaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
