@@ -14,22 +14,22 @@ public class TarefasController {
     }
 
     @PostMapping("/criar")
-    public TarefasModel criarTarefa(@RequestBody TarefasModel tarefa) {
+    public TarefasDTO criarTarefa(@RequestBody TarefasDTO tarefa) {
         return tarefasService.criarTarefa(tarefa);
     }
 
     @GetMapping("/listar")
-    public List<TarefasModel> mostrarTarefa() {
+    public List<TarefasDTO> mostrarTarefa() {
         return tarefasService.mostrarTarefa();
     }
 
     @GetMapping("/listar/{id}")
-    public TarefasModel listarTarefaPorId(@PathVariable Long id) {
+    public TarefasDTO listarTarefaPorId(@PathVariable Long id) {
         return tarefasService.listarTarefaPorId(id);
     }
 
     @PutMapping("/alterar/{id}")
-    public TarefasModel alterarTarefaPorId(@PathVariable Long id, @RequestBody TarefasModel tarefaAtualizada) {
+    public TarefasDTO alterarTarefaPorId(@PathVariable Long id, @RequestBody TarefasDTO tarefaAtualizada) {
         return tarefasService.alterarTarefaPorId(id, tarefaAtualizada);
     }
 
