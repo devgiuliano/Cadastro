@@ -11,7 +11,6 @@ public class PessoaMapper {
         pessoaModel.setIdade(pessoaDTO.getIdade());
         pessoaModel.setEmail(pessoaDTO.getEmail());
         pessoaModel.setTarefas(pessoaDTO.getTarefas());
-
         return pessoaModel;
     }
 
@@ -23,7 +22,6 @@ public class PessoaMapper {
         pessoaDTO.setIdade(pessoaModel.getIdade());
         pessoaDTO.setEmail(pessoaModel.getEmail());
         pessoaDTO.setTarefas(pessoaModel.getTarefas());
-
         return pessoaDTO;
     }
 }
