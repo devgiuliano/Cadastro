@@ -1,15 +1,80 @@
-# 📋 Sistema de Cadastro de Pessoas e Tarefas
+# 📋 Cadastro API
 
-![Java](https://img.shields.io/badge/Java-17-orange?logo=java)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.0-green?logo=springboot)
-![Maven](https://img.shields.io/badge/Maven-3.8+-blue?logo=apachemaven)
+> API REST em Java 17 + Spring Boot 4 para gerenciamento de pessoas e tarefas com relacionamento bidirecional
 
+[![Java](https://img.shields.io/badge/Java-17-orange?style=flat&logo=openjdk)](https://openjdk.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.0-brightgreen?style=flat&logo=springboot)](https://spring.io/projects/spring-boot)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Sistema CRUD completo desenvolvido em **Spring Boot** para gerenciamento de pessoas e tarefas. O projeto foi desenvolvido com o objetivo de consolidar conhecimentos em desenvolvimento backend com Java, arquitetura em camadas e boas práticas de desenvolvimento.
+## 📋 Sobre o Projeto
 
-## 📖 Sobre o Projeto
+A **Cadastro API** é um projeto educacional desenvolvido para praticar conceitos fundamentais do desenvolvimento backend com Java e Spring Boot:
 
-Este é um sistema REST API que permite o cadastro, listagem, atualização e exclusão de pessoas e tarefas. O projeto demonstra o uso de padrões de design como **DTO (Data Transfer Object)**, **Mapper**, **Service Layer** e **Repository Pattern**, seguindo boas práticas de desenvolvimento.
+1. **Arquitetura em Camadas** - Separação clara entre Controller, Service e Repository
+2. **Relacionamento JPA** - Mapeamento bidirecional One-to-Many entre Tarefas e Pessoas
+3. **Padrões de Design** - Implementação de DTOs, Mappers e Service Layer
+4. **Versionamento de Banco** - Controle de schema com Flyway Migrations
+5. **Documentação Interativa** - API documentada com OpenAPI/Swagger
+
+Este projeto demonstra boas práticas de desenvolvimento backend, incluindo persistência com JPA/Hibernate, banco de dados H2 em memória e containerização com Docker.
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+- ✅ Criar API RESTful completa com operações CRUD
+- ✅ Implementar relacionamento bidirecional JPA (One-to-Many)
+- ✅ Aplicar padrões de design (DTO, Mapper, Service Layer, Repository)
+- ✅ Versionar schema de banco de dados com Flyway
+- ✅ Documentar API com OpenAPI/Swagger
+- ✅ Persistir dados com Spring Data JPA e Hibernate
+- ✅ Containerizar aplicação com Docker
+- ✅ Seguir arquitetura em camadas (Layered Architecture)
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+| Tecnologia | Versão | Finalidade |
+|-----------|--------|----------|
+| **Java** | 17 | Linguagem de programação |
+| **Spring Boot** | 4.0.0 | Framework base |
+| **Spring Web MVC** | 6.2.x | Criação de endpoints REST |
+| **Spring Data JPA** | - | Persistência de dados e ORM |
+| **H2 Database** | - | Banco de dados em memória |
+| **Flyway** | - | Versionamento de schema do banco de dados |
+| **Lombok** | - | Redução de código boilerplate |
+| **SpringDoc OpenAPI** | 3.0.1 | Documentação interativa (Swagger) |
+| **Thymeleaf** | - | Template engine |
+| **Maven** | 3.8+ | Gerenciamento de dependências |
+| **Docker** | - | Containerização da aplicação |
+
+---
+
+## 🏗️ Arquitetura do Projeto
+
+```
+cadastro-api/
+├── api/                         # Camada de apresentação (Controllers e DTOs)
+│   ├── Pessoas/
+│   │   ├── PessoaController.java
+│   │   ├── PessoaDTO.java
+│   │   └── PessoaMapper.java
+│   └── Tarefas/
+│       ├── TarefasController.java
+│       ├── TarefasDTO.java
+│       └── TarefasMapper.java
+├── domain/                      # Camada de negócio (Services e Models)
+│   ├── Pessoas/
+│   │   ├── PessoaService.java
+│   │   └── PessoaModel.java
+│   └── Tarefas/
+│       ├── TarefasService.java
+│       └── TarefasModel.java
+└── repository/                  # Camada de persistência
+    ├── PessoaRepository.java
+    └── TarefasRepository.java
+```
 
 ### 🔗 Relacionamento entre Entidades
 
@@ -21,77 +86,42 @@ Tarefas (1) ──── (N) Pessoas
   └─ Cada pessoa está associada a apenas uma tarefa
 ```
 
-## 🛠️ Tecnologias Utilizadas
+### 📐 Padrão de Camadas
 
-| Tecnologia | Versão | Propósito |
-|-----------|--------|----------|
-| **Java** | 17 | Linguagem de programação |
-| **Spring Boot** | 4.0.0 | Framework web e injeção de dependência |
-| **Spring Data JPA** | - | Persistência de dados e ORM |
-| **H2 Database** | - | Banco de dados em memória |
-| **Flyway** | - | Versionamento de schema do banco de dados |
-| **Lombok** | - | Redução de código boilerplate |
-| **SpringDoc OpenAPI** | 3.0.1 | Documentação interativa (Swagger) |
-| **Thymeleaf** | - | Template engine |
-| **Maven** | 3.8+ | Gerenciamento de dependências |
-| **Docker** | - | Containerização da aplicação |
+- **Controller**: Recebe requisições HTTP e delega para o Service
+- **Service**: Contém a lógica de negócio e validações
+- **Repository**: Responsável pela persistência no banco de dados
+- **Mapper**: Converte DTOs para Models e vice-versa
+
+---
 
 ## 📁 Estrutura do Projeto
 
 ```
 Cadastro1/
-├── src/
-│   ├── main/
-│   │   ├── java/dev/pessoalprojects/cadastro/
-│   │   │   ├── CadastroApplication.java          # Classe principal
-│   │   │   ├── Pessoas/                           # Módulo de Pessoas
-│   │   │   │   ├── PessoaModel.java               # Entidade JPA
-│   │   │   │   ├── PessoaDTO.java                 # Objeto de transferência
-│   │   │   │   ├── PessoaMapper.java              # Mapeador DTO ↔ Model
-│   │   │   │   ├── PessoaController.java          # Endpoints REST
-│   │   │   │   ├── PessoaService.java             # Lógica de negócio
-│   │   │   │   └── PessoaRepository.java          # Acesso a dados
-│   │   │   └── Tarefas/                           # Módulo de Tarefas
-│   │   │       ├── TarefasModel.java              # Entidade JPA
-│   │   │       ├── TarefasDTO.java                # Objeto de transferência
-│   │   │       ├── TarefasMapper.java             # Mapeador DTO ↔ Model
-│   │   │       ├── TarefasController.java         # Endpoints REST
-│   │   │       ├── TarefasService.java            # Lógica de negócio
-│   │   │       └── TarefasRepository.java         # Acesso a dados
-│   │   └── resources/
-│   │       ├── application.properties             # Configurações da aplicação
-│   │       └── db/migration/                      # Scripts Flyway
-│   │           ├── V1__Add_tb_cadastro_de_pessoa.sql
-│   │           └── V2__Add_cidade_tb_cadastro_de_pessoa.sql
-│   └── test/java/...                              # Testes unitários
-├── pom.xml                                        # Dependências Maven
-├── Dockerfile                                     # Configuração Docker
-├── mvnw / mvnw.cmd                                # Maven Wrapper
-└── README.md                                      # Este arquivo
+├── src/main/
+│   ├── java/dev/pessoalprojects/cadastro/
+│   │   ├── CadastroApplication.java          # Classe principal
+│   │   ├── Pessoas/                          # Módulo de Pessoas
+│   │   │   ├── PessoaModel.java              # Entidade JPA
+│   │   │   ├── PessoaDTO.java                # Data Transfer Object
+│   │   │   ├── PessoaMapper.java             # Conversão DTO ↔ Model
+│   │   │   ├── PessoaController.java         # Endpoints REST
+│   │   │   ├── PessoaService.java            # Lógica de negócio
+│   │   │   └── PessoaRepository.java         # Interface JPA
+│   │   └── Tarefas/                          # Módulo de Tarefas
+│   │       └── (mesma estrutura de Pessoas)
+│   └── resources/
+│       ├── application.properties            # Configurações
+│       └── db/migration/                     # Scripts Flyway
+│           ├── V1__Add_tb_cadastro_de_pessoa.sql
+│           └── V2__Add_cidade_tb_cadastro_de_pessoa.sql
+├── pom.xml                                   # Dependências Maven
+├── Dockerfile                                # Configuração Docker
+└── README.md                                 # Este arquivo
 ```
 
-## 🏗️ Arquitetura em Camadas
-
-O projeto segue a arquitetura em camadas (Layered Architecture):
-
-```
-┌─────────────────────────────────────┐
-│      Controller (REST API)           │  ← Entrypoint da API
-├─────────────────────────────────────┤
-│      Service (Lógica de Negócio)     │  ← Regras de negócio
-├─────────────────────────────────────┤
-│      Repository (Acesso a Dados)     │  ← Persistência
-├─────────────────────────────────────┤
-│      Database (H2)                   │  ← Armazenamento
-└─────────────────────────────────────┘
-```
-
-**Fluxo de Dados:**
-1. **Controller** → Recebe requisições HTTP
-2. **Mapper** → Converte DTO para Model
-3. **Service** → Aplica lógica de negócio
-4. **Repository** → Persiste dados no banco
-5. **Resposta** → Mapper converte Model para DTO
+---
 
 ## 📊 Modelos de Dados
 
@@ -121,13 +151,18 @@ Representa uma tarefa cadastrada no sistema.
 
 **Tabela:** `tb_cadastro_tarefas`
 
-## 🔌 API Endpoints
+---
+
+## 🔌 Endpoints da API
 
 > 📘 **Dica:** Todos os endpoints podem ser testados através do **Swagger UI** em `http://localhost:8080/swagger-ui/index.html` após iniciar a aplicação.
 
 ### Pessoas
 
 #### ✅ Criar Pessoa
+
+Cria uma nova pessoa no sistema associada a uma tarefa existente.
+
 ```http
 POST /pessoas/criar
 Content-Type: application/json
@@ -143,9 +178,7 @@ Content-Type: application/json
 }
 ```
 
-**Status:** `201 Created`
-
-**Resposta:**
+**Resposta de Sucesso (201 Created):**
 ```json
 {
   "message": "Pessoa criada com sucesso: João Silva"
@@ -155,13 +188,14 @@ Content-Type: application/json
 ---
 
 #### 📖 Listar Todas as Pessoas
+
+Retorna uma lista com todas as pessoas cadastradas no sistema.
+
 ```http
 GET /pessoas/listar
 ```
 
-**Status:** `200 OK`
-
-**Resposta:**
+**Resposta de Sucesso (200 OK):**
 ```json
 [
   {
@@ -175,18 +209,6 @@ GET /pessoas/listar
       "nome": "Desenvolvimento",
       "dificuldade": "Média"
     }
-  },
-  {
-    "id": 2,
-    "nome": "Maria Santos",
-    "email": "maria@email.com",
-    "idade": 28,
-    "cidade": "Brasília",
-    "tarefas": {
-      "id": 1,
-      "nome": "Desenvolvimento",
-      "dificuldade": "Média"
-    }
   }
 ]
 ```
@@ -194,13 +216,14 @@ GET /pessoas/listar
 ---
 
 #### 🔍 Buscar Pessoa por ID
+
+Busca uma pessoa específica pelo seu ID.
+
 ```http
 GET /pessoas/listar/{id}
 ```
 
-**Status:** `200 OK` (sucesso) ou `404 Not Found` (não encontrado)
-
-**Resposta (sucesso):**
+**Resposta de Sucesso (200 OK):**
 ```json
 {
   "id": 1,
@@ -216,7 +239,7 @@ GET /pessoas/listar/{id}
 }
 ```
 
-**Resposta (não encontrado):**
+**Resposta de Erro (404 Not Found):**
 ```json
 {
   "message": "ID não encontrado"
@@ -226,6 +249,9 @@ GET /pessoas/listar/{id}
 ---
 
 #### ✏️ Atualizar Pessoa
+
+Atualiza os dados de uma pessoa existente.
+
 ```http
 PUT /pessoas/alterar/{id}
 Content-Type: application/json
@@ -241,9 +267,7 @@ Content-Type: application/json
 }
 ```
 
-**Status:** `200 OK` (sucesso) ou `404 Not Found` (não encontrado)
-
-**Resposta (sucesso):**
+**Resposta de Sucesso (200 OK):**
 ```json
 {
   "id": 1,
@@ -262,20 +286,21 @@ Content-Type: application/json
 ---
 
 #### 🗑️ Deletar Pessoa
+
+Remove uma pessoa do sistema.
+
 ```http
 DELETE /pessoas/deletar/{id}
 ```
 
-**Status:** `200 OK` (sucesso) ou `404 Not Found` (não encontrado)
-
-**Resposta (sucesso):**
+**Resposta de Sucesso (200 OK):**
 ```json
 {
   "message": "Usuario(a): João Silva deletada com sucesso"
 }
 ```
 
-**Resposta (não encontrado):**
+**Resposta de Erro (404 Not Found):**
 ```json
 {
   "message": "Id não encontrado para deleção"
@@ -287,6 +312,9 @@ DELETE /pessoas/deletar/{id}
 ### Tarefas
 
 #### ✅ Criar Tarefa
+
+Cria uma nova tarefa no sistema.
+
 ```http
 POST /tarefas/criar
 Content-Type: application/json
@@ -297,9 +325,7 @@ Content-Type: application/json
 }
 ```
 
-**Status:** `201 Created`
-
-**Resposta:**
+**Resposta de Sucesso (201 Created):**
 ```json
 {
   "id": 1,
@@ -312,13 +338,14 @@ Content-Type: application/json
 ---
 
 #### 📖 Listar Todas as Tarefas
+
+Retorna todas as tarefas cadastradas com suas pessoas associadas.
+
 ```http
 GET /tarefas/listar
 ```
 
-**Status:** `200 OK`
-
-**Resposta:**
+**Resposta de Sucesso (200 OK):**
 ```json
 [
   {
@@ -331,16 +358,7 @@ GET /tarefas/listar
         "nome": "João Silva",
         "email": "joao@email.com",
         "idade": 30,
-        "cidade": "São Paulo",
-        "tarefas": null
-      },
-      {
-        "id": 2,
-        "nome": "Maria Santos",
-        "email": "maria@email.com",
-        "idade": 28,
-        "cidade": "Brasília",
-        "tarefas": null
+        "cidade": "São Paulo"
       }
     ]
   }
@@ -350,13 +368,14 @@ GET /tarefas/listar
 ---
 
 #### 🔍 Buscar Tarefa por ID
+
+Busca uma tarefa específica pelo seu ID.
+
 ```http
 GET /tarefas/listar/{id}
 ```
 
-**Status:** `200 OK`
-
-**Resposta:**
+**Resposta de Sucesso (200 OK):**
 ```json
 {
   "id": 1,
@@ -369,6 +388,9 @@ GET /tarefas/listar/{id}
 ---
 
 #### ✏️ Atualizar Tarefa
+
+Atualiza os dados de uma tarefa existente.
+
 ```http
 PUT /tarefas/alterar/{id}
 Content-Type: application/json
@@ -379,9 +401,7 @@ Content-Type: application/json
 }
 ```
 
-**Status:** `200 OK`
-
-**Resposta:**
+**Resposta de Sucesso (200 OK):**
 ```json
 {
   "id": 1,
@@ -394,226 +414,216 @@ Content-Type: application/json
 ---
 
 #### 🗑️ Deletar Tarefa
+
+Remove uma tarefa do sistema.
+
 ```http
 DELETE /tarefas/deletar/{id}
 ```
 
-**Status:** `204 No Content` (sem corpo de resposta)
+**Resposta de Sucesso (204 No Content)**
 
 ---
 
-## 📚 Documentação Swagger
+## 📸 Documentação Interativa (Swagger)
 
-A API está completamente documentada com **Swagger/OpenAPI** 3.0.
+A API possui documentação interativa gerada automaticamente com SpringDoc OpenAPI.
 
-### Acessar a Documentação
+**Acesse:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
-Após iniciar a aplicação, acesse:
+![Swagger UI](https://raw.githubusercontent.com/devgiuliano/Giulianom95/refs/heads/main/assets/Swagger.jpg)
 
-**URL:** `http://localhost:8080/swagger-ui/index.html`
-
-A interface do Swagger permite:
-- ✅ Visualizar todos os endpoints
-- ✅ Ver modelos de requisição e resposta
-- ✅ Testar os endpoints diretamente
-- ✅ Visualizar códigos de status HTTP
-
-## ⚙️ Configuração
-
-### Variáveis de Ambiente
-
-O projeto utiliza variáveis de ambiente para configuração do banco de dados:
-
-| Variável | Padrão | Descrição |
-|----------|--------|-----------|
-| `DATABASE_URL` | `jdbc:h2:mem:cadastro` | URL de conexão H2 |
-| `DATABASE_USERNAME` | `sa` | Usuário do banco |
-| `DATABASE_PASSWORD` | `` | Senha do banco |
-
-### application.properties
-
-```properties
-spring.application.name=Cadastro
-
-# H2 Console
-spring.h2.console.enable=true
-
-# Datasource
-spring.datasource.url=${DATABASE_URL}
-spring.datasource.driver=org.h2.Driver
-spring.datasource.username=${DATABASE_USERNAME}
-spring.datasource.password=${DATABASE_PASSWORD}
-
-# JPA / Hibernate
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
-# Flyway
-spring.flyway.enable=true
-spring.flyway.locations=classpath:db/migration
-spring.flyway.baseline-on-migrate=true
-```
+---
 
 ## 🚀 Como Executar
 
 ### Pré-requisitos
 
-- ✅ Java 17 ou superior
-- ✅ Maven 3.6+ (ou use o Maven Wrapper incluído)
-- ✅ Git (para clonar o repositório)
+- **Java 17** ou superior instalado
+- **Maven 3.8+** instalado
+- Conexão com a internet (para download de dependências)
 
-### Execução Local
+### Passos
 
-#### 1️⃣ Clone o repositório
+1. **Clone o repositório**
+
 ```bash
-git clone https://github.com/seu-usuario/Cadastro1.git
+git clone https://github.com/devgiuliano/Cadastro1.git
 cd Cadastro1
 ```
 
-#### 2️⃣ Configure as variáveis de ambiente
+2. **Compile o projeto**
 
-**No Linux/macOS:**
 ```bash
+mvn clean install
+```
+
+3. **Execute a aplicação**
+
+```bash
+mvn spring-boot:run
+```
+
+Ou execute o JAR gerado:
+
+```bash
+java -jar target/Cadastro-0.0.1-SNAPSHOT.jar
+```
+
+4. **Acesse a API**
+
+- **Endpoint base:** `http://localhost:8080`
+- **Swagger UI:** `http://localhost:8080/swagger-ui.html`
+- **H2 Console:** `http://localhost:8080/h2-console`
+
+> **Dica:** No H2 Console, use:
+> - **JDBC URL:** `jdbc:h2:mem:cadastro`
+> - **Username:** `sa`
+> - **Password:** (deixe em branco)
+
+---
+
+## 🧪 Testando a API
+
+### Com cURL
+
+```bash
+# Criar uma tarefa
+curl -X POST http://localhost:8080/tarefas/criar \
+  -H "Content-Type: application/json" \
+  -d '{"nome":"Desenvolvimento","dificuldade":"Média"}'
+
+# Criar uma pessoa
+curl -X POST http://localhost:8080/pessoas/criar \
+  -H "Content-Type: application/json" \
+  -d '{"nome":"João Silva","email":"joao@email.com","idade":30,"cidade":"São Paulo","tarefas":{"id":1}}'
+
+# Listar todas as pessoas
+curl http://localhost:8080/pessoas/listar
+
+# Buscar pessoa por ID
+curl http://localhost:8080/pessoas/listar/1
+```
+
+### Com HTTPie
+
+```bash
+http GET localhost:8080/pessoas/listar
+```
+
+### Com Postman ou Insomnia
+
+Importe a coleção OpenAPI em: `http://localhost:8080/v3/api-docs`
+
+---
+
+## 🎓 Conceitos Implementados
+
+### 1. Arquitetura em Camadas
+
+```
+Controller → Service → Repository → Database
+```
+
+Separação clara de responsabilidades seguindo o padrão MVC.
+
+### 2. Relacionamento JPA Bidirecional
+
+```java
+// TarefasModel (lado One)
+@OneToMany(mappedBy = "tarefas")
+private List<PessoaModel> pessoas;
+
+// PessoaModel (lado Many)
+@ManyToOne
+@JoinColumn(name = "tarefas_id")
+private TarefasModel tarefas;
+```
+
+### 3. Padrão DTO (Data Transfer Object)
+
+Separação entre entidades JPA e objetos expostos pela API, evitando exposição direta do modelo de dados.
+
+### 4. Flyway Migrations
+
+Versionamento automático do schema do banco de dados:
+- `V1__Add_tb_cadastro_de_pessoa.sql` - Cria tabela de pessoas
+- `V2__Add_cidade_tb_cadastro_de_pessoa.sql` - Adiciona coluna cidade
+
+### 5. Documentação OpenAPI
+
+Documentação automática gerada via anotações Spring.
+
+---
+
+## 🛠️ Troubleshooting
+
+### Erro: "Porta 8080 já está em uso"
+
+**Solução:** Altere a porta no `application.properties`:
+
+```properties
+server.port=8081
+```
+
+### Erro: "Failed to configure a DataSource"
+
+**Causa:** Variáveis de ambiente não configuradas.
+
+**Solução:** Configure as variáveis:
+
+```bash
+# Linux/macOS
 export DATABASE_URL=jdbc:h2:mem:cadastro
 export DATABASE_USERNAME=sa
 export DATABASE_PASSWORD=
-```
 
-**No Windows (PowerShell):**
-```powershell
+# Windows PowerShell
 $env:DATABASE_URL="jdbc:h2:mem:cadastro"
 $env:DATABASE_USERNAME="sa"
 $env:DATABASE_PASSWORD=""
 ```
 
-**No Windows (CMD):**
-```cmd
-set DATABASE_URL=jdbc:h2:mem:cadastro
-set DATABASE_USERNAME=sa
-set DATABASE_PASSWORD=
-```
+### H2 Console não abre
 
-#### 3️⃣ Compile e execute
+**Solução:** Verifique se a propriedade está habilitada no `application.properties`:
 
-```bash
-# Compilar
-./mvnw clean install
-
-# Executar
-./mvnw spring-boot:run
-```
-
-**No Windows:**
-```cmd
-mvnw.cmd clean install
-mvnw.cmd spring-boot:run
-```
-
-#### 4️⃣ Acesse a aplicação
-
-| Recurso | URL |
-|---------|-----|
-| **API Base** | http://localhost:8080 |
-| **Swagger UI** | http://localhost:8080/swagger-ui/index.html |
-| **H2 Console** | http://localhost:8080/h2-console |
-
-> **Dica:** No H2 Console, use `sa` como usuário (sem senha).
-
----
-
-## 🐳 Execução com Docker
-
-### 📦 Build da Imagem
-
-#### 1️⃣ Gerar o JAR
-```bash
-./mvnw clean package -DskipTests
-```
-
-#### 2️⃣ Construir a imagem Docker
-```bash
-docker build -t cadastro-app:latest .
-```
-
-### ▶️ Executar o Container
-
-```bash
-docker run --name cadastro-container \
-  -p 8080:8080 \
-  -e DATABASE_URL="jdbc:h2:mem:cadastro" \
-  -e DATABASE_USERNAME="sa" \
-  -e DATABASE_PASSWORD="" \
-  cadastro-app:latest
-```
-
-**Acessar a aplicação:**
-- API: `http://localhost:8080`
-- Swagger: `http://localhost:8080/swagger-ui/index.html`
-
----
-
-## 🧪 Testes
-
-Execute os testes unitários com:
-
-```bash
-./mvnw test
-```
-
-No Windows:
-```cmd
-mvnw.cmd test
+```properties
+spring.h2.console.enable=true
 ```
 
 ---
 
-## 📚 Padrões de Design Utilizados
+## 📚 Recursos de Aprendizado
 
-| Padrão | Descrição | Localização |
-|--------|-----------|------------|
-| **DTO** | Separação entre camada de apresentação e persistência | `*DTO.java` |
-| **Mapper** | Conversão entre DTOs e Models | `*Mapper.java` |
-| **Service** | Lógica de negócio centralizada | `*Service.java` |
-| **Repository** | Abstração do acesso a dados | `*Repository.java` |
-| **Dependency Injection** | Injeção de dependência via construtor | Controllers, Services |
+- [Spring Boot - Documentação Oficial](https://spring.io/projects/spring-boot)
+- [Spring Data JPA - Guia](https://spring.io/guides/gs/accessing-data-jpa/)
+- [Flyway - Database Migrations](https://flywaydb.org/documentation/)
+- [OpenAPI/Swagger - SpringDoc](https://springdoc.org/)
 
 ---
 
-## 📝 Notas de Desenvolvimento
+## 💡 Contribuições
 
-- ✅ Utiliza **Lombok** para reduzir boilerplate (getters, setters, construtores)
-- ✅ Banco de dados **H2** em memória, ideal para desenvolvimento
-- ✅ **Flyway** para controle de versão do banco de dados
-- ✅ **DTOs** para separação de responsabilidades
-- ✅ **Swagger/OpenAPI** para documentação interativa
-- ✅ **Spring Data JPA** para persistência ORM
-- ✅ **Thymeleaf** para template engine
+Este é um projeto educacional, mas sugestões são bem-vindas! Sinta-se à vontade para:
 
----
-
-## 🔄 Roadmap
-
-- [ ] Adicionar autenticação JWT
-- [ ] Implementar Global Exception Handler
-- [ ] Adicionar validações (@Valid)
-- [ ] Implementar paginação (PageRequest)
-- [ ] Adicionar filtros avançados
-- [ ] Cobertura de testes (JaCoCo)
-- [ ] CI/CD com GitHub Actions
+1. Fazer um fork do projeto
+2. Criar uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abrir um Pull Request
 
 ---
 
-## 📞 Suporte
+## 📝 Licença
 
-Para dúvidas, sugestões ou problemas, abra uma [issue](https://github.com/seu-usuario/Cadastro1/issues) no repositório.
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
-
-
 
 ## 👤 Autor
 
-**Giuliano M**
+**Giuliano**
 
 - GitHub: [@devgiuliano](https://github.com/devgiuliano)
 - LinkedIn: [@giulianodev](https://www.linkedin.com/in/giulianodev/)
@@ -623,9 +633,17 @@ Para dúvidas, sugestões ou problemas, abra uma [issue](https://github.com/seu-
 
 ## ⭐ Agradecimentos
 
-Obrigado por interesse neste projeto! Se achou útil, não esquece de deixar uma ⭐ no repositório!
+- Spring Team - Pelo excelente framework
+- Comunidade Java - Pela documentação e tutoriais
+- H2 Database - Pelo banco em memória perfeito para desenvolvimento
 
 ---
 
-**Última atualização:** 27 de Fevereiro, 2026
+<div align="center">
+
+**Desenvolvido com ☕ e 💚 para aprender Spring Boot**
+
+[↑ Voltar ao topo](#-cadastro-api)
+
+</div>
 
